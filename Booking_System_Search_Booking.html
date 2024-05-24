@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="Booking_System.css">
+
+    </head>
+    <body>
+        <img src="9e624bf0f60db7fa6cb5c01850b95e02.png" class="background"></img>
+        <div class="rectangle"></div>
+        <h1>R.A.M.E.N Booking System</h1>
+        <div class="search">
+            <form name="form">
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="fname"><br>
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br>
+
+                <button type="button" onclick="searchForm()">Confirm</button>
+            </form>
+        </div>
+
+        <script>
+            function searchForm() {
+                sessionStorage.setItem("currfname", fname);
+                sessionStorage.setItem("currlname", lname);
+
+                window.location.href='Booking_System_View_Booking.html'
+            }
+        </script>
+    </body>
+</html>

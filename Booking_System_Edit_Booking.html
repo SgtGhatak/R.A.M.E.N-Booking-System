@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Create a Booking</title>
+        <link rel="stylesheet" href="Booking_System.css">
+        
+        <script>
+            var retrievedObject = localStorage.getItem('bookingArray');
+            
+            let index = 0;
+            const bookingArray = JSON.parse(retrievedObject);
+            const currfname = sessionStorage.getItem("currfname");
+            const currlname = sessionStorage.getItem("currlname");
+
+            for (let i = 0; i < bookingArray.length; i++) {
+                if (bookingArray[i].fname == currfname && bookingArray[i].lname == currlname) {
+                    index = i;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <img src="9e624bf0f60db7fa6cb5c01850b95e02.png" class="background"></img>
+        <div class="rectangle"></div>
+        <h1>R.A.M.E.N Booking System</h1>
+        <div class="booking-form">
+            <form name="form">
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="fname"><br>
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br>
+                <label for="dlocation">Departure Location:</label>
+                <input type="text" id="dlocation" name="dlocation"><br>
+                <label for="dtlocation">Destination Location:</label>
+                <input type="text" id="dtlocation" name="dtlocation"><br>
+                <label for="ddate">Departure Date:</label>
+                <input type="text" id="ddate" name="ddate"><br>
+                <label for="dtime">Departure Time:</label>
+                <input type="text" id="dtime" name="dtime"><br>
+                <label for="addinfo">Additional Info:</label><br>
+                <textarea id="addinfo" name="addinfo" rows="4" cols="50"></textarea><br>
+
+                <button type="button" onclick="storeForm()">Confirm</button>
+              </form>
+        </div>
+
+        <script>
+            document.getElementById("fname").value = bookingArray[index].fname
+            document.getElementById("lname").value = bookingArray[index].lname
+            document.getElementById("dlocation").value = bookingArray[index].dlocation
+            document.getElementById("dtlocation").value = bookingArray[index].dtlocation
+            document.getElementById("ddate").value = bookingArray[index].ddate
+            document.getElementById("dtime").value = bookingArray[index].dtime
+            document.getElementById("addinfo").value = bookingArray[index].addinfo
+
+            function storeForm() {
+                const fname = document.getElementById("fname");
+                const lname = document.getElementById("lname");
+                const dlocation = document.getElementById("dlocation");
+                const dtlocation = document.getElementById("dtlocation");
+                const ddate = document.getElementById("ddate");
+                const dtime = document.getElementById("dtime");
+                const addinfo = document.getElementById("addinfo");
+
+                if (bookingArray[index].fname != fname.value) {
+                    bookingArray[index].fname = fname.value
+                }
+                if (bookingArray[index].lname != lname.value) {
+                    bookingArray[index].lname = lname.value
+                }
+                if (bookingArray[index].dlocation != dlocation.value) {
+                    bookingArray[index].dlocation = dlocation.value
+                }
+                if (bookingArray[index].dtlocation != dtlocation.value) {
+                    bookingArray[index].dtlocation = dtlocation.value
+                }
+                if (bookingArray[index].ddate != ddate.value) {
+                    bookingArray[index].ddate = ddate.value
+                }
+                if (bookingArray[index].dtime != dtime.value) {
+                    bookingArray[index].dtime = dtime.value
+                }
+                if (bookingArray[index].addinfo != addinfo.value) {
+                    bookingArray[index].addinfo = addinfo.value
+                }
+
+                localStorage["bookingArray"] = JSON.stringify(bookingArray);
+
+                sessionStorage.setItem("currfname", fname);
+                sessionStorage.setItem("currlname", lname);
+
+                window.location.href='Booking_System_View_Booking.html'
+            }
+        </script>
+    </body>
+</html>
