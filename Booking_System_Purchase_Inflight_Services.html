@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Create a Booking</title>
+        <link rel="stylesheet" href="Booking_System.css">
+    </head>
+    <body>
+        <img src="9e624bf0f60db7fa6cb5c01850b95e02.png" class="background"></img>
+        <div class="rectangle"></div>
+        <h1>R.A.M.E.N Booking System</h1>
+        <div class="flight-services">
+            <form name="form">
+                <label for="food">Food:</label>
+                <input type="checkbox" id="food" name="food"><br>
+                <label for="beverages">Beverages:</label>
+                <input type="checkbox" id="beverages" name="beverages"><br>
+                <label for="snacks">Snacks:</label>
+                <input type="checkbox" id="snacks" name="snacks"><br>
+                <label for="internet">Internet:</label>
+                <input type="checkbox" id="internet" name="internet"><br>
+                <label for="pillows">Additional Pillows:</label>
+                <input type="checkbox" id="pillows" name="pillows"><br>
+
+                <button type="button" onclick="storeForm()">Confirm</button>
+              </form>
+        </div>
+
+        <script>
+            var retrievedObject = localStorage.getItem('bookingArray');
+            
+            let index = 0;
+            const bookingArray = JSON.parse(retrievedObject);
+            const currfname = sessionStorage.getItem("currfname");
+            const currlname = sessionStorage.getItem("currlname");
+
+            for (let i = 0; i < bookingArray.length; i++) {
+                if (bookingArray[i].fname == currfname && bookingArray[i].lname == currlname) {
+                    index = i;
+                }
+            }
+
+            function storeForm() {
+                // get input elements
+                const food = document.getElementById("food").checked;
+                const beverages = document.getElementById("beverages").checked;
+                const snacks = document.getElementById("snacks").checked;
+                const internet = document.getElementById("internet").checked;
+                const pillows = document.getElementById("pillows").checked;
+
+                const services = {food:food, beverages:beverages, snacks:snacks, internet:internet, pillows:pillows}
+                bookingArray[index].services = services
+
+                localStorage["bookingArray"] = JSON.stringify(bookingArray);
+
+                window.location.href='Booking_System_View_Booking.html'
+            }
+        </script>
+    </body>
+</html>

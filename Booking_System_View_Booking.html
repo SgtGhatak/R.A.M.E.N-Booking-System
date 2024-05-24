@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>View booking</title>
+        <link rel="stylesheet" href="Booking_System.css">
+
+        <script>
+            function flightServices() {
+                sessionStorage.setItem("currfname", booking[index].fname);
+                sessionStorage.setItem("currlname", booking[index].lname);
+
+                window.location.href='Booking_System_Purchase_Inflight_Services.html'
+            }
+
+            function editBooking() {
+                sessionStorage.setItem("currfname", booking[index].fname);
+                sessionStorage.setItem("currlname", booking[index].lname);
+
+                window.location.href='Booking_System_Edit_Booking.html'
+            }
+        </script>
+    </head>
+    <body>
+        <img src="9e624bf0f60db7fa6cb5c01850b95e02.png" class="background"></img>
+        <div class="rectangle"></div>
+        <h1>R.A.M.E.N Booking System</h1>
+        <div class="booking-form-display">
+            <div id="fname" style="padding: 10px;"></div>
+            <div id="lname" style="padding: 10px;"></div>
+            <div id="dlocation" style="padding: 10px;"></div>
+            <div id="dtlocation" style="padding: 10px;"></div>
+            <div id="ddate" style="padding: 10px;"></div>
+            <div id="dtime" style="padding: 10px;"></div>
+            <div id="addinfo" style="padding: 10px;"></div>
+            <div id="flightnumber" style="padding: 10px;"></div>
+            <div id="seatnumber" style="padding: 10px;"></div>
+            <div id="services" style="padding: 10px;"></div>
+
+            <button type="button" onclick="window.location.href='Booking_System_Confirm.html'">Confirm</button>
+            <button type="button" onclick=editBooking()>Change Fight Details</button>
+            <button type="button" onclick=flightServices()>Purchase in-flight services</button>
+        </div>
+
+        <script>
+            var retrievedObject = localStorage.getItem('bookingArray');
+
+            let index = 0;
+            const booking = JSON.parse(retrievedObject);
+            const currfname = sessionStorage.getItem("currfname");
+            const currlname = sessionStorage.getItem("currlname");
+
+            for (let i = 0; i < booking.length; i++) {
+                if (booking[i].fname == currfname && booking[i].lname == currlname) {
+                    index = i;
+                }
+            }
+
+            document.getElementById("fname").innerHTML = "First name: " + booking[index].fname;
+            document.getElementById("lname").innerHTML = "Last name: " + booking[index].lname;
+            document.getElementById("dlocation").innerHTML = "Departure Location: " + booking[index].dlocation;
+            document.getElementById("dtlocation").innerHTML = "Destination Location: " + booking[index].dtlocation;
+            document.getElementById("ddate").innerHTML = "Departure Date: " + booking[index].ddate;
+            document.getElementById("dtime").innerHTML = "Departure Time: " + booking[index].dtime;
+            document.getElementById("addinfo").innerHTML = "Additional Info: " + booking[index].addinfo;
+            document.getElementById("flightnumber").innerHTML = "Flight Number: " + booking[index].flightnumber;
+            document.getElementById("seatnumber").innerHTML = "Seat Number: " + booking[index].seatnumber;
+            document.getElementById("services").innerHTML = "In-flight Services:<br>Food: " + booking[index].services.food + "<br>Beverages: " + booking[index].services.beverages + "<br>Snacks: " + booking[index].services.snacks + "<br>Internet: " + booking[index].services.internet + "<br>Pillows: " + booking[index].services.pillows;
+        </script>
+    </body>
+</html>
